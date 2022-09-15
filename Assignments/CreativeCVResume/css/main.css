@@ -80,7 +80,8 @@
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-brown,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-brown {
   color: #fff;
-  background: #378C3F; }
+  background: #378C3F; 
+/*#378C3F*/}
 
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-blue,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-blue {
@@ -1254,13 +1255,14 @@
     top: 1px; }
 
 .btn-primary {
-  background-color: #378C3F;
-  color: #FFFFFF; }
+  background-color: #007BFF;
+  color: #FFFFFF; 
+  text-shadow: 1px 1px 0 #000;}
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary.active:focus, .btn-primary.active:hover,
   .show > .btn-primary.dropdown-toggle,
   .show > .btn-primary.dropdown-toggle:focus,
   .show > .btn-primary.dropdown-toggle:hover {
-    background-color: #40a249;
+    background-color: rgb(71, 180, 200);
     color: #FFFFFF;
     box-shadow: none; }
   .btn-primary:hover {
@@ -2598,7 +2600,7 @@ body {
   background-color: #888 !important; }
 
 .bg-primary {
-  background-color: #378C3F !important; }
+  background-color: #007BFF !important;}
 
 .bg-info {
   background-color: #2CA8FF !important; }
