@@ -575,7 +575,7 @@
     .datepicker.datepicker-primary table tr td.active.disabled div,
     .datepicker.datepicker-primary table tr td.active.disabled:hover div {
       background-color: #FFFFFF;
-      color: #378C3F; }
+      color: #007BFF; }
     .datepicker.datepicker-primary table tr td.day:hover div,
     .datepicker.datepicker-primary table tr td.day.focused div {
       background: rgba(255, 255, 255, 0.2); }
@@ -5238,7 +5238,7 @@ Created using IcoMoon - icomoon.io
   background: #a5a3a3; }
 
 .cc-reference .carousel-indicators .active {
-  background-color: #378C3F; }
+  background-color: #007BFF; }
 
 .cc-reference .carousel-inner {
   box-shadow: none; }
