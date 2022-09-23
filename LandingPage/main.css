@@ -75,6 +75,10 @@ li a:hover {
 	#mobile_menu {
 		display: block;
 	}
+    #mobile_menu li {
+        float: none;
+        background-color: #406a7d;
+    }
 	.slicknav_menu {
 		background: #406a7d !important;
 		padding: 3px !important;
