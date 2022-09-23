@@ -3,17 +3,26 @@
 <meta charset="UTF-8">
 <title>Zipp - Landing Page</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="LandingPage/slicknav.css">
+<link rel="stylesheet" href="LandingPage/main.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="LandingPage/js/jquery.slicknav.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#nav_menu').slicknav({prependTo:"#mobile_menu"});
+    });
+</script>
 <body>
 
     <header>
         <h1>Logan's Student Home Page</h1>
 
-        <nav>
+        <nav id="mobile_menu"></nav>
+        <nav id="nav_menu">
             <ul>
                 <li><a href="https://github.com/LoganZipper">GitHub Pages</a></li>
                 <li><a href="https://vdrive.svsu.edu/htcomnet/">mDrive</a></li>
-                <li><a href="Resume/index.html">CSIS server</a></li>
+                <li><a href="#">CSIS server</a></li>
                 <li><a href ='https://codepen.io/loganzipper/pen/gOzRGXy'>CodePen Notes</a></li>
                 <li><a href="Resume/index.html">Resume</a></li>
             </ul>

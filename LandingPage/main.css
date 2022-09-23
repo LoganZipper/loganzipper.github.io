@@ -52,14 +52,37 @@ nav li {
 }
 
 nav li a {
-display: block;
-color: #FFF;
-padding: 16px 20px;
-text-decoration: none;
-margin: 0;
+    display: block;
+    color: #FFF;
+    padding: 16px 20px;
+    text-decoration: none;
+    margin: 0;
 }
 
 li a:hover {
     background-color: #555;
     color: white;
   }
+
+  #mobile_menu {
+	display: none;
+}
+
+  @media only screen and (max-width: 800px) {
+	#nav_menu {
+		display: none;
+	}
+	#mobile_menu {
+		display: block;
+	}
+	.slicknav_menu {
+		background: #406a7d !important;
+		padding: 3px !important;
+		border-bottom: 2px solid black !important;
+	}
+    /*
+	header {
+		font-size: 80%;
+	}
+    */
+}
