@@ -49,8 +49,12 @@ img[alt="dog icon"] {
   bottom: 150px;
   right: 50px;
 }
-img[alt="bird icon"] {
+
+#positionMe {
   position: relative;
+}
+img[alt="bird icon"] {
+  position: absolute;
   top: 50px;
   left: 250px;
 }
