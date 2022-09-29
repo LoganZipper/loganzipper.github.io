@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Assignment 03</title>
+<link rel="stylesheet" href="css/assignment03.css"/>
+<script src="js/assignment03.js"></script>
+<script>
+    function tempConvert() {
+        let temp = parseFloat(document.getElementById("tempF").value);
+        document.getElementById("tempC").value = ((temp - 32) * 5/9);
+}
+</script>
+	
+	
+</head>
+
+
+  
+<body>
+	<header>
+		<h1>Assignment 3</h1>
+		<h3><em>Procedural JavaScript</em></h3>
+	</header>
+
+    <br>
+
+    <main>
+        <form>
+                <label for="tempF">Fahrenheit:</label>
+                <input type="text" id="tempF" required autofocus >
+                
+				<label for="tempC">Celsius:</label>
+                <input type="text" id="tempC" disabled>
+                
+				<input class="submit" type="button" name="convert" value="Convert" onclick="tempConvert()">
+                
+        </form>
+
+        <br>
+        <br>
+
+        <form>
+            <label for="num1">Integers:</label>
+            <input type="text" id="num1" required>
+            <input type="text" id="num2" required>
+
+            <input type="text" id="gcd" disabled>
+            
+            <input class="submit" type="button" name="gcd" value="GCD" onclick="findGCD()">
+    </form>
+
+    <form>
+        <label for="digits">Enter Number:</label>
+        <input type="text" id="tempF" required autofocus >
+        
+        <label for="sum">Sum of Digits:</label>
+        <input type="text" id="tempC" disabled>
+        
+        <input class="submit" type="button" name="convert" value="sumDigits" onclick="sumDigits()">
+        
+    </form>
+
+    </main>
+</body>
+</html>
