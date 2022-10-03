@@ -17,3 +17,15 @@ function findGCD() {
           
           document.getElementById("gcd").value = x;
 }
+
+function sumDigits() {
+    let initNum = parseInt(document.getElementById("digits").value);
+    document.getElementById("finalSum").value = sumDigitsRecursive(initNum);
+}
+
+function sumDigitsRecursive(curNum) {
+    if(curNum < 1)
+        return 0;
+    
+    return curNum % 10 + sumDigitsRecursive(parseInt(curNum / 10));
+}
