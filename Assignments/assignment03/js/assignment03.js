@@ -29,3 +29,23 @@ function sumDigitsRecursive(curNum) {
     
     return curNum % 10 + sumDigitsRecursive(parseInt(curNum / 10));
 }
+
+function generateName() {
+    let suffix = document.getElementById("suffix").value;
+    let first = document.getElementById("first").value + " ";
+    let last = document.getElementById("last").value;
+    let title = document.getElementById("title").value;
+    
+    if(suffix == "None")
+        suffix = "";
+
+    if(first.length > 0)
+        first += " ";
+    if(last.length > 0)
+        last += " ";
+    if(title == "None")
+        title = "";
+    else title += " ";
+
+    document.getElementById("fullName").value = title + first + last + suffix;
+}

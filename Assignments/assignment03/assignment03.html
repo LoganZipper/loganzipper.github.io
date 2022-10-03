@@ -59,6 +59,43 @@
         <input class="submit" type="button" name="convert" value="sumDigits" onclick="sumDigits()">
         
     </form>
+    
+    <form>
+        <label for="title">Name:</label>
+        <select id="title">
+            <option value="none">None</option>
+            <option value="Mr">Mr.</option>
+            <option value="Mrs">Mrs.</option>
+            <option value="Dr">Dr.</option>
+            <option value="Other" onclick="swap()">Other</option>
+          </select>
+        <input type="text" id="first" required>
+        <input type="text" id="last" required>
+        <select id="suffix">
+            <option value="none">None</option>
+            <option value="Jr">Jr.</option>
+            <option value="Sr">Sr.</option>
+            <option value="II">II</option>
+            <option value="Other" onclick="swap2()">Other</option>
+          </select>
+        <!--<input type="text" id="suffix" required>-->
+
+        <input type="text" id="fullName" disabled>
+        
+        <input class="submit" type="button" name="generateName" value="Generate Name" onclick="generateName()">
+    </form>
+
+    <div id="ticTac">
+        <div class="ticBox" id="box1"></div>
+        <div class="ticBox" id="box2"></div>
+        <div class="ticBox" id="box3"></div>
+        <div class="ticBox" id="box4"></div>
+        <div class="ticBox" id="box5"></div>
+        <div class="ticBox" id="box6"></div>
+        <div class="ticBox" id="box7"></div>
+        <div class="ticBox" id="box8"></div>
+        <div class="ticBox" id="box9"></div>
+    </div>
 
     </main>
 </body>
