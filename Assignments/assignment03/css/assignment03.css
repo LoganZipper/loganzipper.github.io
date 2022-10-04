@@ -60,9 +60,9 @@ input:focus {
     font-size: 40px;
     text-align: center;
     color: red;
+    cursor: pointer;
 }
 
 .ticBox:hover {
     background-color: antiquewhite;
-    cursor: hand;
 }
