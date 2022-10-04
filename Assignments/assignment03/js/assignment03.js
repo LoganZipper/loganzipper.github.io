@@ -36,14 +36,14 @@ function generateName() {
     let last = document.getElementById("last").value;
     let title = document.getElementById("title").value;
     
-    if(suffix == "None")
+    if(suffix == "none")
         suffix = "";
 
     if(first.length > 0)
         first += " ";
     if(last.length > 0)
         last += " ";
-    if(title == "None")
+    if(title == "none")
         title = "";
     else title += " ";
 
@@ -71,6 +71,8 @@ addGlobalEventListener("click", ".ticBox", e => {
 
 
 function ticTac(userSelection) {
+    if(winState())
+        return;
     //User Moves
     let xo = 'X';
     let input = 0;
@@ -107,11 +109,13 @@ function ticTac(userSelection) {
         }
         if(turn % 2 == 1) {
             console.log("Robot is Making its move");
-        let temporary = 0;
-        xo = 'O';		//O placed on odd turns
+        let temporary = -1;
+            xo = 'O';		//O placed on odd turns
             input = -1;
         	input = ticTacBrain('O');        //Possible wins checked first
+            console.log("Robot input is " + input);
        		temporary = ticTacBrain('X');    //Defensive moves checked if no wins present
+            console.log("Robot temp is " + temporary);
        		
        		if(input == -1 && temporary > -1) input = temporary;
            
@@ -139,32 +143,32 @@ function ticTac(userSelection) {
 function ticTacBrain(spotlight) {
     //Robot painfully checks every possible win/loss condition on the board
     //Called twice - once for X, once for O - hence 'spotlight' parameter
-	if(boxes[0].innerHTML == '' && (((boxes[1].innerHTML.innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[0].innerHTML == '1')) {
+	if(((boxes[1].innerHTML.innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[0].innerHTML == '') {
          return 0;
      }
-      else if(boxes[1].innerHTML == '' && (((boxes[0].innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[1].innerHTML == '2')) {
+      else if(((boxes[0].innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[1].innerHTML == '') {
           return 1;
       }
-      else if(boxes[2].innerHTML == '' && (((boxes[0].innerHTML == boxes[1].innerHTML && boxes[1].innerHTML == spotlight) || (boxes[5].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight)) && boxes[2].innerHTML == '3')) {
+      else if(((boxes[0].innerHTML == boxes[1].innerHTML && boxes[1].innerHTML == spotlight) || (boxes[5].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight)) && boxes[2].innerHTML == '') {
           return 2;
       }
-      else if(boxes[3].innerHTML == '' && (((boxes[0].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight)) && boxes[3].innerHTML == '4')) {
+      else if(((boxes[0].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight)) && boxes[3].innerHTML == '') {
           return 3;
       }
-      else if(boxes[4].innerHTML == '' && (((boxes[0].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || 
-              (boxes[3].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[1].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[4].innerHTML == '5')) {
+      else if(((boxes[0].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || 
+              (boxes[3].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[1].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[4].innerHTML == '') {
           return 4;
       }
-     else if(boxes[5].innerHTML == '' && (((boxes[2].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[5].innerHTML == '6')) {
+     else if(((boxes[2].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[5].innerHTML == '') {
          return 5;
      }
-     else if(boxes[6].innerHTML == '' && (((boxes[0].innerHTML == boxes[3].innerHTML && boxes[3].innerHTML == spotlight) || (boxes[7].innerHTML ==  boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[6].innerHTML == '7')) {
+     else if(((boxes[0].innerHTML == boxes[3].innerHTML && boxes[3].innerHTML == spotlight) || (boxes[7].innerHTML ==  boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[6].innerHTML == '') {
          return 6;
      }
-     else if(boxes[7].innerHTML == '' && (((boxes[1].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[7].innerHTML == '8')) {
+     else if(((boxes[1].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[7].innerHTML == '') {
          return 7;
      }
-    else if(boxes[8].innerHTML == '' && (((boxes[2].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight) || (boxes[0].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[8].innerHTML == '9')) {
+    else if(((boxes[2].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight) || (boxes[0].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[8].innerHTML == '') {
     	return 8;
 	}
      	else return -1;
@@ -219,7 +223,7 @@ function winState() {	//Compares current inputs. All win conditions independentl
     else if(turn == (10)) {											//Tie game declared when all spaces filled without full row/column/diagonal
     	console.log("tie game")
     	input = 0;													//end game
-    	
+    	return true;
 	}
     return false;
 }

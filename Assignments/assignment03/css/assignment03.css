@@ -32,7 +32,7 @@ label {
     min-width: 10em;
 }
 
-input {
+input, select {
     grid-column: 2/3;
     margin-left: 1em;
     margin-bottom: .5em;
