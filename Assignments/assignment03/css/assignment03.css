@@ -43,13 +43,25 @@ input:focus {
     width: 50%;
 }
 
-ticTac{
+#ticTac {
     display: grid;
-    grid-template: repeat(3, 2vw) / repeat(3, 2vw) ;
+    grid-template-rows: repeat(3, 60px);
+    grid-template-columns: repeat(3, 60px);
 }
 
 .ticBox {
     width: 50px;
     height: 50px;
     background-color: grey;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-right: 5px;
+    float: left;
+    font-size: 40px;
+    text-align: center;
+    color: red;
+}
+
+.ticBox:hover {
+    background-color: antiquewhite;
 }

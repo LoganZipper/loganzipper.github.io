@@ -32,7 +32,7 @@ function sumDigitsRecursive(curNum) {
 
 function generateName() {
     let suffix = document.getElementById("suffix").value;
-    let first = document.getElementById("first").value + " ";
+    let first = document.getElementById("first").value;
     let last = document.getElementById("last").value;
     let title = document.getElementById("title").value;
     
@@ -50,151 +50,195 @@ function generateName() {
     document.getElementById("fullName").value = title + first + last + suffix;
 }
 
-turn = 0;
-boxes = document.querySelectorAll("ticBox");
+let turn = 0;
+var boxes;
+function doSomething() {
+    boxes = document.getElementsByClassName("ticBox");
+    //console.log(boxes[0].innerHTML);
+    //console.log(boxes.length);
+}
+setTimeout( () => {
+    doSomething();
+}, 2);
+
+
+
+
 addGlobalEventListener("click", ".ticBox", e => {
     ticTac(e.target)
   })
 
+
+
 function ticTac(userSelection) {
     //User Moves
+    let xo = 'X';
+    let input = 0;
     if(turn % 2 == 0) {	//Checks if turn count is even or odd for user
-        switch(turn % 2) {
-        	case 0 : xo = 'X';
-        			 break;
-        	case 1: xo = 'O';
+        xo = 'X';
         			
-		} 
-        input = 0
-        for(entry in boxes) {
-            if(entry = userSelection)
+		 
+
+        for(i = 0;i < 9;i++) {
+            console.log(boxes[i]);
+            console.log(userSelection)
+            if(boxes[i] == userSelection)
                 break;
             input++;
         }
-        turn++;
-    
-        }
-        else {
-        temporary = 0;
-        xo = 'O';		//O placed on odd turns
-        
-            srand(time(0));
-            
-        	input = robotBrain('O');        //Possible wins checked first
-       		temporary = robotBrain('X');    //Defensive moves checked if no wins present
-       		
-       		if(input == 0 && temporary > 0) input = temporary;
+
+        console.log("input =" + input)
+        if(input >= 0 && input <= 8) {
+            if (boxes[input].innerHTML == 'X' || boxes[input].innerHTML == 'O') // decides if spot is already taken
+                 turn--;
+            else
+                boxes[input].innerHTML = xo;		// If spot is not taken, X/O placed in position
            
-            if(input == 0) input = robotStrategy(); //Advacned strategy accessed if no drasic moves exist
+            //userSelection.innerHTML = "X"
+            console.log(userSelection)
+        }
+        turn++;
+        console.log("Turn = " + turn);
+        console.log();
+        console.log();
+        console.log();
+        if(winState() || turn == 9)
+            return;
+        }
+        if(turn % 2 == 1) {
+            console.log("Robot is Making its move");
+        let temporary = 0;
+        xo = 'O';		//O placed on odd turns
+            input = -1;
+        	input = ticTacBrain('O');        //Possible wins checked first
+       		temporary = ticTacBrain('X');    //Defensive moves checked if no wins present
+       		
+       		if(input == -1 && temporary > -1) input = temporary;
+           
+            if(input == -1) input = ticTacBackup(); //Advacned strategy accessed if no drasic moves exist
             
             
-            while(input == 0) {
-            	input = rand() % 9;         //Last resort random #
+            while(input == -1) {
+            	input = Math.floor(Math.random() * 9);         //Last resort random #
+                if(boxes[input].innerHTML != '') input = -1;
 			} 
     		
-		   turn++;
+        boxes[input].innerHTML = xo;
+        boxes[input].style.color = "blue";
+		turn++;
         }
          
-        if(input >= 1 && input <= 9)
-            if (board[input] == 'X' || board[input] == 'O') // decides if spot is already taken
-            {
-                turn--;
-            }
-            board[1] = xo;		// If spot is not taken, X/O placed in position
+            
     
 
         //Switch to check if a spot is open. Called whenever any player attempts a move
         
         winState();			//Check for possible win after each move
 
-    ticTacBrain();
 }
-function ticTacBrain() {
+function ticTacBrain(spotlight) {
     //Robot painfully checks every possible win/loss condition on the board
     //Called twice - once for X, once for O - hence 'spotlight' parameter
-	if(((board[2] == board[3] && board[3] == spotlight) || (board[4] == board[7] && board[7] == spotlight) || (board[5] == board[9] && board[9] == spotlight)) && board[1] == '1') {
-         return 1;
+	if(boxes[0].innerHTML == '' && (((boxes[1].innerHTML.innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[0].innerHTML == '1')) {
+         return 0;
      }
-      else if(((board[1] == board[3] && board[3] == spotlight) || (board[5] == board[8] && board[8] == spotlight)) && board[2] == '2') {
+      else if(boxes[1].innerHTML == '' && (((boxes[0].innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[1].innerHTML == '2')) {
+          return 1;
+      }
+      else if(boxes[2].innerHTML == '' && (((boxes[0].innerHTML == boxes[1].innerHTML && boxes[1].innerHTML == spotlight) || (boxes[5].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight)) && boxes[2].innerHTML == '3')) {
           return 2;
       }
-      else if(((board[1] == board[2] && board[2] == spotlight) || (board[6] == board[9] && board[9] == spotlight) || (board[5] == board[7] && board[7] == spotlight)) && board[3] == '3') {
+      else if(boxes[3].innerHTML == '' && (((boxes[0].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight)) && boxes[3].innerHTML == '4')) {
           return 3;
       }
-      else if(((board[1] == board[7] && board[7] == spotlight) || (board[5] == board[6] && board[6] == spotlight)) && board[4] == '4') {
+      else if(boxes[4].innerHTML == '' && (((boxes[0].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || 
+              (boxes[3].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[1].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[4].innerHTML == '5')) {
           return 4;
       }
-      else if(((board[1] == board[9] && board[9] == spotlight) || (board[3] == board[7] && board[7] == spotlight) || 
-              (board[4] == board[6] && board[6] == spotlight) || (board[2] == board[8] && board[8] == spotlight)) && board[5] == '5') {
-          return 5;
-      }
-     else if(((board[3] == board[9] && board[9] == spotlight) || (board[4] == board[5] && board[5] == spotlight)) && board[6] == '6') {
+     else if(boxes[5].innerHTML == '' && (((boxes[2].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[5].innerHTML == '6')) {
+         return 5;
+     }
+     else if(boxes[6].innerHTML == '' && (((boxes[0].innerHTML == boxes[3].innerHTML && boxes[3].innerHTML == spotlight) || (boxes[7].innerHTML ==  boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[6].innerHTML == '7')) {
          return 6;
      }
-     else if(((board[1] == board[4] && board[4] == spotlight) || (board[8] ==  board[9] && board[9] == spotlight) || (board[3] == board[5] && board[5] == spotlight)) && board[7] == '7') {
+     else if(boxes[7].innerHTML == '' && (((boxes[1].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[7].innerHTML == '8')) {
          return 7;
      }
-     else if(((board[2] == board[5] && board[5] == spotlight) || (board[7] == board[9] && board[9] == spotlight)) && board[8] == '8') {
-         return 8;
-     }
-    else if(((board[3] == board[6] && board[6] == spotlight) || (board[7] == board[8] && board[8] == spotlight) || (board[1] == board[5] && board[5] == spotlight)) && board[9] == '9') {
-    	return 9;
+    else if(boxes[8].innerHTML == '' && (((boxes[2].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight) || (boxes[0].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[8].innerHTML == '9')) {
+    	return 8;
 	}
-     	else return 0;
+     	else return -1;
 }
 
 function ticTacBackup() {
-    if(board[1] == '1' && board[3] == '3' && board[7] == '7' && board[9] == '9') {
-        return 1;
+    if(boxes[0].innerHTML == '' && boxes[2].innerHTML == '' && boxes[6].innerHTML == '' && boxes[8].innerHTML == '') {
+        return 0;
     }
-    else if(board[1] == 'O' && board[9] == '9' && (board[3] == '3' || board[7] == '7')) {
-        return 9;
-    }
-    else if((turn + 1)/2 - coinFlip == 2 && board[1] == 'X' && board[9] == 'X') {
-        return 2;
-    }
-    else if((turn + 1)/2 - coinFlip == 2 && board[3] == 'X' && board[7] == 'X') {
+    else if(boxes[0].innerHTML == 'O' && boxes[8].innerHTML == '' && (boxes[2].innerHTML == '' || boxes[6].innerHTML == '')) {
         return 8;
     }
-    else if(board[5] == '5') {
-        return 5;
+    else if((turn + 1)/2 == 2 && boxes[0].innerHTML == 'X' && boxes[8].innerHTML == 'X'&& boxes[4].innerHTML == '') {
+        return 4;
     }
-    else return 0;
+    else if((turn + 1)/2 == 2 && boxes[2].innerHTML == 'X' && boxes[6].innerHTML == 'X' && boxes[4].innerHTML == '') {
+        return 4;
+    }
+    else if(boxes[4].innerHTML == '') {
+        return 4;
+    }
+    else return -1;
 }
 
 function winState() {	//Compares current inputs. All win conditions independently checked
     
-    if((board[1] == board[4]) && (board[4] == board[7]))  		      //Win on Left Column
-        declareWinner(board[7]);									  
+    if((boxes[0].innerHTML == boxes[3].innerHTML) && (boxes[3].innerHTML == boxes[6].innerHTML))  		      //Win on Left Column
+        return declareWinner(boxes[6].innerHTML);									  
     
-    else if((board[2] == board[5]) && (board[5] == board[8])) 		  //Win on Middle Column
-        declareWinner(board[8]);
+    else if((boxes[1].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[7].innerHTML)) 		  //Win on Middle Column
+        return declareWinner(boxes[7].innerHTML);
 
-    else if((board[3] == board[6]) && (board[6] == board[9])) 	      //Win on Right Column
-        declareWinner(board[9]);
+    else if((boxes[2].innerHTML == boxes[5].innerHTML) && (boxes[5].innerHTML == boxes[8].innerHTML)) 	      //Win on Right Column
+        return declareWinner(boxes[8].innerHTML);
     
-    else if((board[1] == board[2]) && (board[2] == board[3]))		  //Win on Top Row
-        declareWinner(board[3]);
+    else if((boxes[0].innerHTML == boxes[1].innerHTML) && (boxes[1].innerHTML == boxes[2].innerHTML))		  //Win on Top Row
+        return declareWinner(boxes[2].innerHTML);
     
-    else if((board[4] == board[5]) && (board[5] == board[6]))         //Win on Middle Row
-        declareWinner(board[6]);
+    else if((boxes[3].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[5].innerHTML))         //Win on Middle Row
+        return declareWinner(boxes[5].innerHTML);
 
-    else if((board[7] == board[8]) && (board[8] == board[9])) 	      //Win on Bottom row
-        declareWinner(board[9]);
+    else if((boxes[6].innerHTML == boxes[7].innerHTML) && (boxes[7].innerHTML == boxes[8].innerHTML)) 	      //Win on Bottom row
+        return declareWinner(boxes[8].innerHTML);
     
-    else if((board[1] == board[5]) && (board[5] == board[9])) 	 	//Win On '\' Diagonal
-        declareWinner(board[1]);
+    else if((boxes[0].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[8].innerHTML)) 	 	//Win On '\' Diagonal
+        return declareWinner(boxes[0].innerHTML);
     
-    else if((board[3] == board[5]) && (board[5] == board[7])){		//Win on '/' Diagonal
-        declareWinner(board[7]);
+    else if((boxes[2].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[6].innerHTML)){		//Win on '/' Diagonal
+        return declareWinner(boxes[6].innerHTML);
+        
     }
-    else if(turn == (9 + coinFlip)) {											//Tie game declared when all spaces filled without full row/column/diagonal
-    	boardDisplay();
-    	cout << endl << "Tie Game!" << endl;
+    else if(turn == (10)) {											//Tie game declared when all spaces filled without full row/column/diagonal
+    	console.log("tie game")
     	input = 0;													//end game
     	
 	}
+    return false;
+}
 
+function declareWinner(val) {		                              //Displays the Winner and the final board
+    switch(val) 
+    {
+        case 'X': 
+        	console.log("X wins!");
+            break;
+        case 'O': 
+            console.log("O wins!");
+            break;
+        case '':
+            return false;
+    }
+    document.removeEventListener("click", ".ticBox");
+    input = 0;                              // end game
+    return true;
 }
 
 function addGlobalEventListener(type, selector, callback) {
