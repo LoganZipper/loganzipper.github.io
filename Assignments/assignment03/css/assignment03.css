@@ -64,4 +64,5 @@ input:focus {
 
 .ticBox:hover {
     background-color: antiquewhite;
+    cursor: hand;
 }

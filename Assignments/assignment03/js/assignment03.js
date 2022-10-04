@@ -175,21 +175,19 @@ function ticTacBrain(spotlight) {
 }
 
 function ticTacBackup() {
-    if(boxes[0].innerHTML == '' && boxes[2].innerHTML == '' && boxes[6].innerHTML == '' && boxes[8].innerHTML == '') {
-        return 0;
+    if(boxes[4].innerHTML == '') {
+        return 4;
+    }
+    else if(boxes[0].innerHTML == 'X' && boxes[8].innerHTML == 'X') {
+        return 1;
+    }
+    else if(boxes[2].innerHTML == 'X' && boxes[6].innerHTML == 'X') {
+        return 1;
     }
     else if(boxes[0].innerHTML == 'O' && boxes[8].innerHTML == '' && (boxes[2].innerHTML == '' || boxes[6].innerHTML == '')) {
         return 8;
     }
-    else if((turn + 1)/2 == 2 && boxes[0].innerHTML == 'X' && boxes[8].innerHTML == 'X'&& boxes[4].innerHTML == '') {
-        return 4;
-    }
-    else if((turn + 1)/2 == 2 && boxes[2].innerHTML == 'X' && boxes[6].innerHTML == 'X' && boxes[4].innerHTML == '') {
-        return 4;
-    }
-    else if(boxes[4].innerHTML == '') {
-        return 4;
-    }
+    
     else return -1;
 }
 
