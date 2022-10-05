@@ -8,14 +8,17 @@ function findGCD() {
         return;
     }
         
-    
-        while(y) {
-            let t = y;
-            y = x % y;
-            x = t;
-          }
-          
-          document.getElementById("gcd").value = x;
+    /* This snippet is borrowed from "w3resource.com" */
+    x = Math.abs(x);
+    y = Math.abs(y);
+
+    while(y) {
+        let t = y;
+        y = x % y;
+        x = t;
+        }
+    /* end of borrowed snippet  */
+    document.getElementById("gcd").value = x;
 }
 
 function sumDigits() {
@@ -52,10 +55,10 @@ function generateName() {
 
 let turn = 0;
 var boxes;
+//"boxes" list loaded asynchronously. Timeout needed to access its elements.
+//still not sure why this needed to be done, but its the only thing that worked
 function doSomething() {
     boxes = document.getElementsByClassName("ticBox");
-    //console.log(boxes[0].innerHTML);
-    //console.log(boxes.length);
 }
 setTimeout( () => {
     doSomething();
@@ -63,16 +66,17 @@ setTimeout( () => {
 
 
 
-
+//Listen for boxes to be clicked
 addGlobalEventListener("click", ".ticBox", e => {
     ticTac(e.target)
   })
 
 
-
+//User action evaluated, followed by the bot on a successful move.
 function ticTac(userSelection) {
     if(winState())
         return;
+    console.log("turn  is " + turn);
     //User Moves
     let xo = 'X';
     let input = 0;
@@ -91,12 +95,15 @@ function ticTac(userSelection) {
 
         console.log("input =" + input)
         if(input >= 0 && input <= 8) {
-            if (boxes[input].innerHTML == 'X' || boxes[input].innerHTML == 'O') // decides if spot is already taken
+            if (boxes[input].innerText == 'X' || boxes[input].innerText == 'O') // decides if spot is already taken
                  turn--;
-            else
-                boxes[input].innerHTML = xo;		// If spot is not taken, X/O placed in position
+            else {
+                boxes[input].innerText = xo;		// If spot is not taken, X/O placed in position
+                boxes[input].style.backgroundColor = "antiquewhite";
+            }
+                
            
-            //userSelection.innerHTML = "X"
+            //userSelection.innerText = "X"
             console.log(userSelection)
         }
         turn++;
@@ -124,11 +131,12 @@ function ticTac(userSelection) {
             
             while(input == -1) {
             	input = Math.floor(Math.random() * 9);         //Last resort random #
-                if(boxes[input].innerHTML != '') input = -1;
+                if(boxes[input].innerText != '') input = -1;
 			} 
     		
-        boxes[input].innerHTML = xo;
-        boxes[input].style.color = "blue";
+        boxes[input].innerText = xo;
+        boxes[input].style.color = "#2C68FF";
+        boxes[input].style.backgroundColor = "antiquewhite";
 		turn++;
         }
          
@@ -143,48 +151,56 @@ function ticTac(userSelection) {
 function ticTacBrain(spotlight) {
     //Robot painfully checks every possible win/loss condition on the board
     //Called twice - once for X, once for O - hence 'spotlight' parameter
-	if(((boxes[1].innerHTML.innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[0].innerHTML == '') {
+	if(((boxes[1].innerText == boxes[2].innerText && boxes[2].innerText == spotlight) || (boxes[3].innerText == boxes[6].innerText && boxes[6].innerText == spotlight) || (boxes[4].innerText == boxes[8].innerText && boxes[8].innerText == spotlight)) && boxes[0].innerText == '') {
          return 0;
      }
-      else if(((boxes[0].innerHTML == boxes[2].innerHTML && boxes[2].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[1].innerHTML == '') {
+      else if(((boxes[0].innerText == boxes[2].innerText && boxes[2].innerText == spotlight) || (boxes[4].innerText == boxes[7].innerText && boxes[7].innerText == spotlight)) && boxes[1].innerText == '') {
           return 1;
       }
-      else if(((boxes[0].innerHTML == boxes[1].innerHTML && boxes[1].innerHTML == spotlight) || (boxes[5].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight)) && boxes[2].innerHTML == '') {
+      else if(((boxes[0].innerText == boxes[1].innerText && boxes[1].innerText == spotlight) || (boxes[5].innerText == boxes[8].innerText && boxes[8].innerText == spotlight) || (boxes[4].innerText == boxes[6].innerText && boxes[6].innerText == spotlight)) && boxes[2].innerText == '') {
           return 2;
       }
-      else if(((boxes[0].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || (boxes[4].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight)) && boxes[3].innerHTML == '') {
+      else if(((boxes[0].innerText == boxes[6].innerText && boxes[6].innerText == spotlight) || (boxes[4].innerText == boxes[5].innerText && boxes[5].innerText == spotlight)) && boxes[3].innerText == '') {
           return 3;
       }
-      else if(((boxes[0].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[6].innerHTML && boxes[6].innerHTML == spotlight) || 
-              (boxes[3].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[1].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight)) && boxes[4].innerHTML == '') {
+      else if(((boxes[0].innerText == boxes[8].innerText && boxes[8].innerText == spotlight) || (boxes[2].innerText == boxes[6].innerText && boxes[6].innerText == spotlight) || 
+              (boxes[3].innerText == boxes[5].innerText && boxes[5].innerText == spotlight) || (boxes[1].innerText == boxes[7].innerText && boxes[7].innerText == spotlight)) && boxes[4].innerText == '') {
           return 4;
       }
-     else if(((boxes[2].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[3].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[5].innerHTML == '') {
+     else if(((boxes[2].innerText == boxes[8].innerText && boxes[8].innerText == spotlight) || (boxes[3].innerText == boxes[4].innerText && boxes[4].innerText == spotlight)) && boxes[5].innerText == '') {
          return 5;
      }
-     else if(((boxes[0].innerHTML == boxes[3].innerHTML && boxes[3].innerHTML == spotlight) || (boxes[7].innerHTML ==  boxes[8].innerHTML && boxes[8].innerHTML == spotlight) || (boxes[2].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[6].innerHTML == '') {
+     else if(((boxes[0].innerText == boxes[3].innerText && boxes[3].innerText == spotlight) || (boxes[7].innerText ==  boxes[8].innerText && boxes[8].innerText == spotlight) || (boxes[2].innerText == boxes[4].innerText && boxes[4].innerText == spotlight)) && boxes[6].innerText == '') {
          return 6;
      }
-     else if(((boxes[1].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[8].innerHTML && boxes[8].innerHTML == spotlight)) && boxes[7].innerHTML == '') {
+     else if(((boxes[1].innerText == boxes[4].innerText && boxes[4].innerText == spotlight) || (boxes[6].innerText == boxes[8].innerText && boxes[8].innerText == spotlight)) && boxes[7].innerText == '') {
          return 7;
      }
-    else if(((boxes[2].innerHTML == boxes[5].innerHTML && boxes[5].innerHTML == spotlight) || (boxes[6].innerHTML == boxes[7].innerHTML && boxes[7].innerHTML == spotlight) || (boxes[0].innerHTML == boxes[4].innerHTML && boxes[4].innerHTML == spotlight)) && boxes[8].innerHTML == '') {
+    else if(((boxes[2].innerText == boxes[5].innerText && boxes[5].innerText == spotlight) || (boxes[6].innerText == boxes[7].innerText && boxes[7].innerText == spotlight) || (boxes[0].innerText == boxes[4].innerText && boxes[4].innerText == spotlight)) && boxes[8].innerText == '') {
     	return 8;
 	}
      	else return -1;
 }
 
 function ticTacBackup() {
-    if(boxes[4].innerHTML == '') {
+    if(boxes[4].innerText == '') {
         return 4;
     }
-    else if(boxes[0].innerHTML == 'X' && boxes[8].innerHTML == 'X') {
+    else if(turn == 1 && boxes[4].innerText == 'X') return 0;
+    else if(turn <= 3 && boxes[4].innerText == 'X' && (boxes[0].innerText == 'X' || boxes[2].innerText == 'X' || boxes[6].innerText == 'X' || boxes[8].innerText == 'X')) {
+        if(boxes[0].innerText == '') return 0;
+        else if(boxes[2].innerText == '') return 2;
+        else if(boxes[6].innerText == '') return 6;
+        else if(boxes[8].innerText == '') return 8;
+    }
+        
+    else if(boxes[0].innerText == 'X' && boxes[8].innerText == 'X') {
         return 1;
     }
-    else if(boxes[2].innerHTML == 'X' && boxes[6].innerHTML == 'X') {
+    else if(boxes[2].innerText == 'X' && boxes[6].innerText == 'X') {
         return 1;
     }
-    else if(boxes[0].innerHTML == 'O' && boxes[8].innerHTML == '' && (boxes[2].innerHTML == '' || boxes[6].innerHTML == '')) {
+    else if(boxes[0].innerText == 'O' && boxes[8].innerText == '' && (boxes[2].innerText == '' || boxes[6].innerText == '')) {
         return 8;
     }
     
@@ -193,32 +209,55 @@ function ticTacBackup() {
 
 function winState() {	//Compares current inputs. All win conditions independently checked
     
-    if((boxes[0].innerHTML == boxes[3].innerHTML) && (boxes[3].innerHTML == boxes[6].innerHTML))  		      //Win on Left Column
-        return declareWinner(boxes[6].innerHTML);									  
+    if((boxes[0].innerText == boxes[3].innerText) && (boxes[3].innerText == boxes[6].innerText))  		      //Win on Left Column
+        if(declareWinner(boxes[0].innerText)) {
+            showWin(boxes[0], boxes[3], boxes[6]);
+            return true;
+        }								  
     
-    else if((boxes[1].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[7].innerHTML)) 		  //Win on Middle Column
-        return declareWinner(boxes[7].innerHTML);
+    if((boxes[1].innerText == boxes[4].innerText) && (boxes[4].innerText == boxes[7].innerText)) 		  //Win on Middle Column
+        if(declareWinner(boxes[1].innerText)) {
+            showWin(boxes[1], boxes[4], boxes[7]);
+            return true;
+        }
 
-    else if((boxes[2].innerHTML == boxes[5].innerHTML) && (boxes[5].innerHTML == boxes[8].innerHTML)) 	      //Win on Right Column
-        return declareWinner(boxes[8].innerHTML);
+    if((boxes[2].innerText == boxes[5].innerText) && (boxes[5].innerText == boxes[8].innerText)) 	      //Win on Right Column
+        if(declareWinner(boxes[2].innerText)) {
+            showWin(boxes[2], boxes[5], boxes[8]);
+            return true;
+        }
     
-    else if((boxes[0].innerHTML == boxes[1].innerHTML) && (boxes[1].innerHTML == boxes[2].innerHTML))		  //Win on Top Row
-        return declareWinner(boxes[2].innerHTML);
+    if((boxes[0].innerText == boxes[1].innerText) && (boxes[1].innerText == boxes[2].innerText))		  //Win on Top Row
+        if(declareWinner(boxes[0].innerText)) {
+            showWin(boxes[0], boxes[1], boxes[2]);
+            return true;
+        }
     
-    else if((boxes[3].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[5].innerHTML))         //Win on Middle Row
-        return declareWinner(boxes[5].innerHTML);
+    if((boxes[3].innerText == boxes[4].innerText) && (boxes[4].innerText == boxes[5].innerText))         //Win on Middle Row
+        if(declareWinner(boxes[3].innerText)) {
+            showWin(boxes[3], boxes[4], boxes[5]);
+            return true;
+        }
 
-    else if((boxes[6].innerHTML == boxes[7].innerHTML) && (boxes[7].innerHTML == boxes[8].innerHTML)) 	      //Win on Bottom row
-        return declareWinner(boxes[8].innerHTML);
+    if((boxes[6].innerText == boxes[7].innerText) && (boxes[7].innerText == boxes[8].innerText)) 	      //Win on Bottom row
+        if(declareWinner(boxes[6].innerText)) {
+            showWin(boxes[6], boxes[7], boxes[8]);
+            return true;
+        }
     
-    else if((boxes[0].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[8].innerHTML)) 	 	//Win On '\' Diagonal
-        return declareWinner(boxes[0].innerHTML);
-    
-    else if((boxes[2].innerHTML == boxes[4].innerHTML) && (boxes[4].innerHTML == boxes[6].innerHTML)){		//Win on '/' Diagonal
-        return declareWinner(boxes[6].innerHTML);
-        
+    if((boxes[0].innerText == boxes[4].innerText) && (boxes[4].innerText == boxes[8].innerText)) 	 	//Win On '\' Diagonal
+        if(declareWinner(boxes[0].innerText)) {
+        showWin(boxes[0], boxes[4], boxes[8]);
+        return true;
     }
-    else if(turn == (10)) {											//Tie game declared when all spaces filled without full row/column/diagonal
+    
+    if((boxes[2].innerText == boxes[4].innerText) && (boxes[4].innerText == boxes[6].innerText))		//Win on '/' Diagonal
+        if(declareWinner(boxes[2].innerText)) {
+            showWin(boxes[2], boxes[4], boxes[6]);
+            return true;
+        }
+        
+    if(turn == (10)) {											//Tie game declared when all spaces filled without full row/column/diagonal
     	console.log("tie game")
     	input = 0;													//end game
     	return true;
@@ -238,9 +277,17 @@ function declareWinner(val) {		                              //Displays the Winn
         case '':
             return false;
     }
-    document.removeEventListener("click", ".ticBox");
+    //document.removeEventListener("click", ".ticBox");
     input = 0;                              // end game
     return true;
+}
+
+function showWin(box1, box2, box3) {
+    console.log(box1.innerText);
+    color = (box1.innerText == 'X') ? "darkred" : "#000080";
+    box1.style.backgroundColor = color;
+    box2.style.backgroundColor = color;
+    box3.style.backgroundColor = color;
 }
 
 function addGlobalEventListener(type, selector, callback) {
