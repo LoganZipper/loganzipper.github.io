@@ -116,7 +116,7 @@ function ticTac(userSelection) {
         }
         if(turn % 2 == 1) {
             console.log("Robot is Making its move");
-        let temporary = -1;
+            let temporary = -1;
             xo = 'O';		//O placed on odd turns
             input = -1;
         	input = ticTacBrain('O');        //Possible wins checked first
@@ -277,7 +277,6 @@ function declareWinner(val) {		                              //Displays the Winn
         case '':
             return false;
     }
-    //document.removeEventListener("click", ".ticBox");
     input = 0;                              // end game
     return true;
 }
