@@ -52,7 +52,7 @@ input:focus {
 #ticTac h2 {
     text-align: center;
     grid-row: 1;
-    grid-column: 1 / 4;
+    grid-column: span 3;
 }
 
 .ticBox {
