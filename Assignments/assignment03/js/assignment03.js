@@ -254,8 +254,9 @@ function winState() {	//Compares current inputs. All win conditions independentl
             return true;
         }
         
-    if(turn == (10)) {											//Tie game declared when all spaces filled without full row/column/diagonal
+    if(turn == (9)) {											//Tie game declared when all spaces filled without full row/column/diagonal
     	console.log("tie game")
+        document.getElementById("result").innerHTML = "Tie Game!";
     	input = 0;													//end game
     	return true;
 	}
@@ -267,9 +268,11 @@ function declareWinner(val) {		                              //Displays the Winn
     {
         case 'X': 
         	console.log("X wins!");
+            document.getElementById("result").innerHTML = "X Wins!";
             break;
         case 'O': 
             console.log("O wins!");
+            document.getElementById("result").innerHTML = "O Wins!";
             break;
         case '':
             return false;
@@ -291,3 +294,5 @@ function addGlobalEventListener(type, selector, callback) {
       if (e.target.matches(selector)) callback(e)
     })
   }
+
+  
