@@ -139,9 +139,6 @@ function ticTac(userSelection) {
         boxes[input].style.backgroundColor = "antiquewhite";
 		turn++;
         }
-         
-            
-    
 
         //Switch to check if a spot is open. Called whenever any player attempts a move
         
