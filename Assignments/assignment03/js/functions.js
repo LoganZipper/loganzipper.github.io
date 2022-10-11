@@ -1,6 +1,9 @@
-/* define your functions here */
-
-
+/*
+    Filename:    functions.js
+    Author:      Logan Zipp (lrzipp@svsu.edu)
+    Description: Load shopping cart information after 
+                 page creation with JavaScript
+ */
 
 function calculateTotal(quantity, price) {
     return quantity * price;
@@ -49,17 +52,18 @@ function outputCartRow(item, total) {
     }
     
     let shipping = (subtotal < shipMinimum) ? 40 : 0
-    setTimeout( () => {
-        //After page load, update bottom of table with correct total amounts
-        let totals = document.getElementsByClassName('totals');
-        totals[0].getElementsByTagName("td")[1].innerHTML = "$" + subtotal.toFixed(2);
-        totals[1].getElementsByTagName("td")[1].innerHTML = "$" + (subtotal * tax).toFixed(2);
-        totals[2].getElementsByTagName("td")[1].innerHTML = "$" + shipping.toFixed(2);
-        totals[3].getElementsByTagName("td")[1].innerHTML = "$" + parseFloat(subtotal + (subtotal * tax) + shipping).toFixed(2);
-    }, 2);
+
+    //After page load, update bottom of table with correct total amounts
+    let totals = document.getElementsByClassName('totals');
+    totals[0].getElementsByTagName("td")[1].innerHTML = "$" + subtotal.toFixed(2);
+    totals[1].getElementsByTagName("td")[1].innerHTML = "$" + (subtotal * tax).toFixed(2);
+    totals[2].getElementsByTagName("td")[1].innerHTML = "$" + shipping.toFixed(2);
+    totals[3].getElementsByTagName("td")[1].innerHTML = "$" + parseFloat(subtotal + (subtotal * tax) + shipping).toFixed(2);
     
     
 }
+
+outputCartRow();
 
 
 

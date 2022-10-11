@@ -1,3 +1,10 @@
+/*
+    Filename:    assignment03.js
+    Author:      Logan Zipp (lrzipp@svsu.edu)
+    Description: Utilization of JavaScript in forms
+ */
+
+
 function findGCD() {
 
     let x = parseInt(document.getElementById("num1").value);
@@ -54,17 +61,7 @@ function generateName() {
 }
 
 let turn = 0;
-var boxes;
-//"boxes" list loaded asynchronously. Timeout needed to access its elements.
-//still not sure why this needed to be done, but its the only thing that worked
-function doSomething() {
-    boxes = document.getElementsByClassName("ticBox");
-}
-setTimeout( () => {
-    doSomething();
-}, 2);
-
-
+var boxes = document.getElementsByClassName("ticBox");
 
 //Listen for boxes to be clicked
 addGlobalEventListener("click", ".ticBox", e => {
@@ -107,10 +104,10 @@ function ticTac(userSelection) {
             console.log(userSelection)
         }
         turn++;
-        console.log("Turn = " + turn);
+        /* console.log("Turn = " + turn);
         console.log();
         console.log();
-        console.log();
+        console.log(); */
         if(winState() || turn == 9)
             return;
         }
