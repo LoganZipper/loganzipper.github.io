@@ -11,12 +11,12 @@ function calculateTotal(quantity, price) {
 
 function outputCartRow(item, total) {
     //Prompt user for tax & shipping threshold
-    let tax = prompt("What is the tax?", "0.10");
-    let shipMinimum = prompt("What is the shipping threshold?", "300");
+    let tax = parseFloat(prompt("What is the tax?", "0.10"));
+    let shipMinimum = parseFloat(prompt("What is the shipping threshold?", "300"));
     
     // select the HTML table 
     //Save for later
-    var subtotal = 0;
+    let subtotal = 0;
 	let tbl = document.getElementsByClassName('table-fill')[0];
     
     let i = 0;

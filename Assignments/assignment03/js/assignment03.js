@@ -5,6 +5,7 @@
  */
 
 
+
 function findGCD() {
 
     let x = parseInt(document.getElementById("num1").value);
@@ -57,7 +58,17 @@ function generateName() {
         title = "";
     else title += " ";
 
-    document.getElementById("fullName").value = title + first + last + suffix;
+    if(first.length == 0 || last.length == 0) {
+        document.getElementById("fullName").value = "Please fill out required items";
+        document.getElementById("first").style.borderColor = "red";
+        document.getElementById("last").style.borderColor = "red";
+    }
+    else {
+        document.getElementById("fullName").value = title + first + last + suffix;
+        document.getElementById("first").style.borderColor = "black";
+        document.getElementById("last").style.borderColor = "black";
+    }
+    
 }
 
 let turn = 0;
