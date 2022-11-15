@@ -86,5 +86,33 @@ let quadratic = (a, b, c) => {
     if(b - 4*a*c < 0)
         return "No Zeroes"
 
-    
+    else {
+        let zero1 = (b + Math.sqrt(b - 4*a*c < 0))/(2*a)
+        let zero2 = (b - Math.sqrt(b - 4*a*c < 0))/(2*a)
+        if(zero1 == zero2)
+            return "One Zero at x = " + zero1
+        else
+            return "Two Zeroes at x = " + zero1 + " and x = " + zero2
+    }
 }
+
+let sphereVolume = (r) => Math.PI * r**3
+
+let FtoK = (f) => (f - 32) * 5/9 + 273.15
+
+let arcTan = (x) => Math.atan(Math.PI + x)
+
+let numPlusSquare = (n) => n + n*n
+
+let isLeapYear = (year) => {
+    let february = new Date(year, 2)
+    if(february.getDay > 28)
+        return true
+    else return false
+}    
+
+let simplifiedTimeFallen = (d) => sqrt(d)/16
+
+console.log(
+    years.filter(e => {isLeapYear(e)})
+)
