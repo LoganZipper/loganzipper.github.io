@@ -1,3 +1,11 @@
+/*
+    Filename:    assignment03.js
+    Author:      Logan Zipp (lrzipp@svsu.edu)
+    Description: Utilization of JavaScript in forms
+ */
+
+
+
 function findGCD() {
 
     let x = parseInt(document.getElementById("num1").value);
@@ -50,21 +58,21 @@ function generateName() {
         title = "";
     else title += " ";
 
-    document.getElementById("fullName").value = title + first + last + suffix;
+    if(first.length == 0 || last.length == 0) {
+        document.getElementById("fullName").value = "Please fill out required items";
+        document.getElementById("first").style.borderColor = "red";
+        document.getElementById("last").style.borderColor = "red";
+    }
+    else {
+        document.getElementById("fullName").value = title + first + last + suffix;
+        document.getElementById("first").style.borderColor = "black";
+        document.getElementById("last").style.borderColor = "black";
+    }
+    
 }
 
 let turn = 0;
-var boxes;
-//"boxes" list loaded asynchronously. Timeout needed to access its elements.
-//still not sure why this needed to be done, but its the only thing that worked
-function doSomething() {
-    boxes = document.getElementsByClassName("ticBox");
-}
-setTimeout( () => {
-    doSomething();
-}, 2);
-
-
+var boxes = document.getElementsByClassName("ticBox");
 
 //Listen for boxes to be clicked
 addGlobalEventListener("click", ".ticBox", e => {
@@ -107,10 +115,10 @@ function ticTac(userSelection) {
             console.log(userSelection)
         }
         turn++;
-        console.log("Turn = " + turn);
+        /* console.log("Turn = " + turn);
         console.log();
         console.log();
-        console.log();
+        console.log(); */
         if(winState() || turn == 9)
             return;
         }
