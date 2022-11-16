@@ -114,5 +114,35 @@ let isLeapYear = (year) => {
 let simplifiedTimeFallen = (d) => sqrt(d)/16
 
 console.log(
-    years.filter(e => {isLeapYear(e)})
+    years.filter(e => {isLeapYear(e)}).reduce((a,b) => {a + b})
 )
+
+console.log(
+    arr3.map(e => {
+        e.fname + e.lname
+    })
+)
+
+let total = 0;
+for(let i = 0; i < arr1.length;i++) {
+    total += arr1[i] * arr2[i]
+}
+console.log("Dot product of arr1 and arr2 is " + total);
+
+let evenTotal = 0;
+for(let i = 0; i < arr2.length;i++) {
+    if(arr2[i] % 2 == 0)
+        evenTotal += arr2[i]
+}
+console.log(
+    arr2.filter(e => {
+        e % 2 == 0
+    }).reduce((a,b) => {
+        a + b
+    })
+);
+
+let radTotal = 0;
+for(let i = 0; i < arr5.length;i++) {
+    radTotal += sphereVolume(arr5[i])
+}
