@@ -105,44 +105,41 @@ let arcTan = (x) => Math.atan(Math.PI + x)
 let numPlusSquare = (n) => n + n*n
 
 let isLeapYear = (year) => {
-    let february = new Date(year, 2)
+    let february = new Date(year, 2, 0)
     if(february.getDay > 28)
         return true
     else return false
 }    
 
-let simplifiedTimeFallen = (d) => sqrt(d)/16
+let simplifiedTimeFallen = (d) => Math.sqrt(d)/16
 
 console.log(
-    years.filter(e => {isLeapYear(e)}).reduce((a,b) => {a + b})
+    years.filter(e => {isLeapYear(e.valueOf)}) //.reduce((a,b) => a + b)
 )
 
 console.log(
-    arr3.map(e => {
-        e.fname + e.lname
-    })
+    arr3.map(e => e.fname  + " " + e.lname)
 )
 
-let total = 0;
-for(let i = 0; i < arr1.length;i++) {
-    total += arr1[i] * arr2[i]
-}
-console.log("Dot product of arr1 and arr2 is " + total);
 
-let evenTotal = 0;
-for(let i = 0; i < arr2.length;i++) {
-    if(arr2[i] % 2 == 0)
-        evenTotal += arr2[i]
-}
+console.log("Dot product of arr1 and arr2 is " + 
+    arr1.map((e,i) => e * arr2[i]).reduce((a,b) => a + b))
+
 console.log(
-    arr2.filter(e => {
-        e % 2 == 0
-    }).reduce((a,b) => {
+    arr2.filter(e => e % 2 == 0
+    ).reduce((a,b) => {
         a + b
     })
-);
+)
 
-let radTotal = 0;
-for(let i = 0; i < arr5.length;i++) {
-    radTotal += sphereVolume(arr5[i])
-}
+console.log(
+    r.reduce(e => sphereVolume(e))
+)
+
+console.log(
+    distances.map(e => simplifiedTimeFallen(e))
+)
+
+console.log(
+    r.reduce(e => arcTan(e))
+)
