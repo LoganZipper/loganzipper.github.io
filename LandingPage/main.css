@@ -39,8 +39,11 @@ nav li {
 }
 
 #assignments {
+    float: left;
     text-align: center;
     width: 25%;
+    margin-right: 2em;
+    
 }
 
 #assignments li {
