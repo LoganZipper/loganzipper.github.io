@@ -26,10 +26,28 @@ function loadPriorCountry () {
   country--
   if (country < 0) 
     country = 0
-  document.getElementById("coviddata").innerHTML 
-            = json.Countries[country].Country
-            + ", " 
-            + json.Countries[country].TotalDeaths
+    document.getElementById("ID").value 
+    = json.Countries[country].ID
+document.getElementById("Country").value 
+    = json.Countries[country].Country
+document.getElementById("CountryCode").value 
+    = json.Countries[country].CountryCode
+document.getElementById("Slug").value 
+    = json.Countries[country].Slug
+document.getElementById("NewConfirmed").value 
+    = json.Countries[country].NewConfirmed
+document.getElementById("TotalConfirmed").value 
+    = json.Countries[country].TotalConfirmed
+document.getElementById("NewDeaths").value 
+    = json.Countries[country].NewDeaths
+document.getElementById("TotalDeaths").value 
+    = json.Countries[country].TotalDeaths
+document.getElementById("NewRecovered").value 
+    = json.Countries[country].NewRecovered
+document.getElementById("TotalRecovered").value 
+    = json.Countries[country].TotalRecovered
+document.getElementById("Date").value 
+    = json.Countries[country].Date
 }
 function loadNextCountry () {
   country++
