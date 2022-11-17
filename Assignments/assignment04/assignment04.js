@@ -1,3 +1,12 @@
+
+/*
+Filename:    assignment04.js
+Author:      Logan Zipp
+Description: Displaying mutable COVID information from a web API
+                + demonstrating knowledge of arrow functions
+                + Utilizing array methods  
+*/
+
 document
   .getElementById("loadjson")
   .addEventListener("click", loadJson);
@@ -124,7 +133,7 @@ let numPlusSquare = (n) => n + n*n
 
 let isLeapYear = (year) => {
     let february = new Date(year, 2, 0)
-    if(february.getDay > 28)
+    if(february.getDate() > 28)
         return true
     else return false
 }    
@@ -132,32 +141,38 @@ let isLeapYear = (year) => {
 let simplifiedTimeFallen = (d) => Math.sqrt(d)/16
 
 console.log(
-    years.filter(e => {isLeapYear(e.valueOf)}) //.reduce((a,b) => a + b)
+    "Sum of Leap Years is: " +
+    years.filter(e => isLeapYear(e)).reduce((a,b) => a + b)
 )
 
 console.log(
-    arr3.map(e => e.fname  + " " + e.lname)
+    "Full Names are: " +
+    arr3.map(e => " " + e.fname  + " " + e.lname)
 )
 
 
-console.log("Dot product of arr1 and arr2 is " + 
-    arr1.map((e,i) => e * arr2[i]).reduce((a,b) => a + b))
+console.log(
+    "Dot Product of arr1 and arr2 is: " + 
+    arr1.map((e,i) => e * arr2[i]).reduce((a,b) => a + b)
+    )
 
 console.log(
+    "Sum of even numbers is: " +
     arr2.filter(e => e % 2 == 0
-    ).reduce((a,b) => {
-        a + b
-    })
+    ).reduce((a,b) => a + b)
 )
 
 console.log(
-    r.reduce(e => sphereVolume(e))
+    "Calculated radii: " + 
+    r.map(e => " " + sphereVolume(e).toFixed(3))
 )
 
 console.log(
-    distances.map(e => simplifiedTimeFallen(e))
+    "Times to fall: " +
+    distances.map(e => " " + simplifiedTimeFallen(e).toFixed(3))
 )
 
 console.log(
-    r.reduce(e => arcTan(e))
+    "Sum of arctan values: " +
+    r.reduce(e => arcTan(e)).toFixed(3)
 )
