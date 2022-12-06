@@ -13,8 +13,31 @@ var loans = [
   
   function loadDoc() {
     $("#recalculate").on("click", function() {processForm()});
+
+    $("#save").on("click", function() {
+      localStorage.setItem("persistent_loan_data", JSON.stringify(loans));
+    });
+
+    $("#load").on("click", function() {
+      loanData = localStorage.getItem("persistent_loan_data")
+      loans = JSON.parse(loanData);
+      for(let i=1; i<6; i++) {
+        $("#loan_year0"+ i).val(loans[i-1].loan_year);
+        $("#loan_amt0"+ i).val(loans[i-1].loan_amount.toFixed(2));
+        $("#loan_int0"+ i).val(loans[i-1].loan_int_rate);
+      }
+    });
+
+    // update loans array when exiting "year" input field (jquery)
+    $("#loan_year01").blur( function() {
+      updateLoansArray();
+    });
+
+    $("#loan_int01").blur(function() {
+      updateInterest()
+    });
     for(let i = 1; i < 6; i++)
-        $("#loan_amt0" + i).on("click", function() {updateAmount(i)})
+        $("#loan_amt0" + i).blur(function() {updateAmount(i)})
     
     // pre-fill defaults for first loan year
     let defaultYear = loans[0].loan_year;
@@ -58,15 +81,6 @@ var loans = [
       $(this).css("background-color", "white");
     });
     
-    // set focus to first year: messes up codepen
-    // $("#loan_year01").focus();
-    // update loans array when exiting "year" input field (jquery)
-    $("#loan_year01").blur( function() {
-      updateLoansArray();
-    });
-
-    $("#loan_int01").blur(function() {updateInterest()});
-    
   } // end: function loadDoc()
   
   
@@ -75,18 +89,26 @@ var loans = [
   }
   
   function updateLoansArray() {
+    let yearRegex = /20[\d][\d]/;
+    if(!yearRegex.test($("#loan_year01").val())) 
+      $("#loan_year01").val(new Date().getFullYear())
+  
     // update the loans array
     loans[0].loan_year = parseInt($("#loan_year01").val()); // jquery
     // update all the years in the "year" column
     for(let i=2; i<6; i++) {
-      loans[i-1].loan_year = loans[0].loan_year + i;
+      loans[i-1].loan_year = loans[0].loan_year + i-1;
       $("#loan_year0"+ i ).val(loans[i-1].loan_year); // jquery
     }
   }
 
   function updateInterest() {
+    let intRegex = /[0]?[\.]\d*/
+    if(!intRegex.test($("#loan_int01").val())) 
+      $("#loan_int01").val("0.0453")
     loans[0].loan_int_rate = parseFloat($("#loan_int01").val());
-
+    //Takes care of 0 if user doesn't enter it ".123 instead of 0.123 for example"
+    $("#loan_int01").val(loans[0].loan_int_rate);
     for(let i=2; i<6; i++) {
         loans[i-1].loan_year = loans[0].loan_year;
          $("#loan_int0"+ i).val(loans[0].loan_int_rate); // jquery
@@ -94,6 +116,9 @@ var loans = [
   }
 
   function updateAmount(idx) {
+    let amtRegex = /\d*$|\d*\.\d*?/
+    if(!amtRegex.test($("#loan_amt0" + idx).val())) 
+      $("#loan_amt0" + idx).val(10000.00);
     loans[idx - 1].loan_amount = parseFloat($("#loan_amt0" + idx).val());
     $("#loan_amt0" + idx).val(loans[idx - 1].loan_amount.toFixed(2));
   }
@@ -110,3 +135,45 @@ var loans = [
     $("#loan_int_accrued").html("$" + toComma((balance - loanTotal).toFixed(2)));
     
   }
+ 
+  function verifyForm() {
+    let yearRegex = /20[\d][\d]/;
+    let amtRegex = /\d*(\.?)\d*/
+    let intRegex = /(0?)\.\d*/
+
+    //for()
+  }
+
+  var app = angular.module('myApp', []);
+
+  app.controller('myCtrl', function($scope) {
+    $scope.payments = [];
+    $scope.populate = function () {
+      
+      updateForm();
+      
+      let total = loanWithInterest;
+      let iRate = loans[0].loan_int_rate;
+      let r = iRate / 12;
+      let n = 11;
+      //loan payment formula
+      //https://www.thebalance.com/loan-payment-calculations-315564
+      let pay = 12 * (total / ((((1+r)**(n*12))-1)/(r *(1+r)**(n*12))));
+      for (let i = 0; i < 10; i++) {
+        total -= pay 
+        let int = total * (iRate); 
+        $scope.payments[i] = {
+          "year":loans[4].loan_year + i + 1,
+          "payment": toMoney(pay), 
+          "amt": toMoney(int),
+          "ye": toMoney(total += int)
+        }
+      }
+      $scope.payments[10] = {
+        "year":loans[4].loan_year + 11,
+        "payment": toMoney(total),
+        "amt": toMoney(0),
+        "ye":toMoney(0)
+      }
+    }
+  });

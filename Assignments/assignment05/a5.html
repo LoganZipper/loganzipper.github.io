@@ -78,6 +78,8 @@
 							</table>
 							<br />
 							<button id="recalculate" type="button" class="btn btn-primary">Re-calculate</button> 
+							<button id="save" type="button" class="btn btn-secondary">Save</button> 
+							<button id="load" type="button" class="btn btn-secondary">Load</button> 
 						</div>
 					</div>
 
@@ -99,7 +101,12 @@
 									<td><span id="pmt_int01">$2,297.60</span></td>
 									<td><span id="pmt_bal01">$53,017.22</span></td>
 								</tr>
-								
+								<tr ng-repeat="x in payments">
+									<td>{{ x.year }}</td>
+									<td>{{ x.payment }}</td>
+									<td>{{ x.amt }}</td>
+									<td>{{ x.ye }}</td>
+								</tr>
 							</table>
 						</div>
 					</div>
@@ -115,6 +122,9 @@
 src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"></script>
+
+<!--- angular 1.6.9 -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <script src="a5.js"></script>
 	</body>
