@@ -1,11 +1,12 @@
 body {
-    font: 1em Arial, Helvetica, sans-serif;
+    font: 1em 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #EBEBE8;
 }
 header {
     padding: 10px 0 0 0;
     border-bottom: 2px solid black;
-    background-color: #6dacf0;
+    background-color: #414141;
+    color: whitesmoke;
 }
 header img {
     float: left;
@@ -13,7 +14,6 @@ header img {
 header h1 {
     font-size: 400%;
     text-align: center;
-    font-family: "Georgia", 'Headings', Arial, Helvetica, serif;
     text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 header h3 {
@@ -38,21 +38,27 @@ nav li {
     background-color: #000;
 }
 
-#assignments {
+.assignments {
     float: left;
     text-align: center;
-    width: 25%;
-    margin-right: 2em;
-    
+    width: 49%;
 }
 
-#assignments li {
+.assignments li {
     float: none;
     background-color: #888;
     color: black;
     width: 100%;
     border: 1px solid white;
-    font-size: 1.2em;
+    font-size: 2vw;
+}
+
+.assignments h2 {
+    font-size: 1.8vw;
+}
+
+#a1 {
+    margin-right: 2%;
 }
 
 nav li a {
@@ -81,13 +87,25 @@ li a:hover {
 	}
     #mobile_menu li {
         float: none;
-        background-color: #406a7d;
+        background-color: #888;
     }
 	.slicknav_menu {
-		background: #406a7d !important;
+		background: black !important;
 		padding: 3px !important;
 		border-bottom: 2px solid black !important;
 	}
+    #a1 {
+        width: 100%;
+    }
+    #a2 {
+        width: 100%;
+    }
+    .assignments li {
+        font-size: 1.5em;
+    }
+    .assignments h2 {
+        font-size: 1.75em;
+    }
     /*
 	header {
 		font-size: 80%;
