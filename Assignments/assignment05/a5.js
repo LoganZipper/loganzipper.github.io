@@ -7,12 +7,12 @@ var loans = [
     { loan_year: 2023, loan_amount: 10000.00, loan_int_rate: 0.0453 },
     { loan_year: 2024, loan_amount: 10000.00, loan_int_rate: 0.0453 }
   ]; 
-  
+  var loanTotal = 0;
   
   // --- function: loadDoc() ---
   
   function loadDoc() {
-    $("#recalculate").on("click", function() {processForm()});
+    //$("#recalculate").on("click", function() {processForm()});
 
     $("#save").on("click", function() {
       localStorage.setItem("persistent_loan_data", JSON.stringify(loans));
@@ -125,7 +125,7 @@ var loans = [
 
   function processForm() {
     let balance = 0;
-    let loanTotal = 0;
+    loanTotal = 0;
     for(let i = 1; i < 6; i++) {
         loanTotal += loans[i-1].loan_amount;
         balance += loans[i-1].loan_amount;
@@ -149,10 +149,9 @@ var loans = [
   app.controller('myCtrl', function($scope) {
     $scope.payments = [];
     $scope.populate = function () {
+      processForm();
       
-      updateForm();
-      
-      let total = loanWithInterest;
+      let total = loanTotal;
       let iRate = loans[0].loan_int_rate;
       let r = iRate / 12;
       let n = 11;
@@ -164,16 +163,16 @@ var loans = [
         let int = total * (iRate); 
         $scope.payments[i] = {
           "year":loans[4].loan_year + i + 1,
-          "payment": toMoney(pay), 
-          "amt": toMoney(int),
-          "ye": toMoney(total += int)
+          "payment": "$" + pay.toFixed(2), 
+          "amt": "$" + int.toFixed(2),
+          "ye": "$" + (total += int).toFixed(2)
         }
       }
       $scope.payments[10] = {
         "year":loans[4].loan_year + 11,
-        "payment": toMoney(total),
-        "amt": toMoney(0),
-        "ye":toMoney(0)
+        "payment": "$" + total.toFixed(2),
+        "amt": "$" + 0,
+        "ye": "$" + 0
       }
     }
   });
