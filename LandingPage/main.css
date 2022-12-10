@@ -94,6 +94,18 @@ li a:hover {
 		padding: 3px !important;
 		border-bottom: 2px solid black !important;
 	}
+    nav li {
+        width: 70%;
+        padding-right: 6%;
+        top: 50%;
+        display: inline-block;
+    }
+    nav li a {
+        height: 2em;
+        width: 100%;
+        padding: none;
+        margin: none;
+    }
     #a1 {
         width: 100%;
     }
