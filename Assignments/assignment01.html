@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Minimial HTML</title>
+
+<style>
+	body {
+		font: 90% Arial, Helvetica, sans-serif;
+		background-color: #ebebe8;
+	    margin: 20px; }
+	header {
+		padding: 40px 0;
+		border-bottom: 2px solid black;
+
+	}
+	header img {
+		float: left;
+	}
+	header h1 {
+		font-size: 400%;
+		text-align: center;
+		font-family: "Georgia", 'Headings', Arial, Helvetica, serif;
+		text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+	}
+	header h3 {
+		font-size: 125%;
+		text-align: center;
+	}
+	img {
+		padding: 2em;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		float: none;
+		display: block;
+	}
+	#article {
+		border-bottom: 2px solid black;
+	}
+	#article {
+		border-spacing: 2em 0;
+	}
+	form {
+		display: grid;
+		grid-template-columns: 10vw 40vw;
+		
+	}
+	
+	label {
+		grid-column: 1/2;
+		min-width: 10em;
+	}
+	
+	input {
+		grid-column: 2/3;
+		margin-left: 1em;
+		margin-bottom: .5em;
+	}
+	input:focus {
+			border: 2px solid navy; }
+	#submit {
+		width: 50%;
+	}
+	
+	</style>
+</head>
+
+
+  
+<body>
+	<header>
+		<h1>Assignment 1</h1>
+		<h3><em>Random Experimentation</em></h3>
+	</header>
+
+	<table id="article">
+	<tr><td colspan="2"></td></tr>
+	<tr>
+		<td>
+		<img src="images/portrait.jpg" width="300" height="300" alt="Cartoon Skater Portrait"/>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu consectetur leo. Suspendisse non 
+		ante mi. Cras accumsan enim vel suscipit fringilla. In eget orci et ex rutrum fermentum sit amet id sem. 
+		Vestibulum ut dapibus arcu. Maecenas dapibus est quis velit maximus, at consequat nulla rhoncus. 
+		Donec consectetur libero eu enim vestibulum, quis congue orci aliquet. Class aptent taciti sociosqu 
+		ad litora torquent per conubia nostra, per inceptos himenaeos.
+		<br>
+		<br>
+		<p> This is an example of the <code>code tag</code> inside normal text<p>
+		<br>
+		Ut tincidunt, metus at viverra cursus, elit nisl facilisis elit, a pellentesque massa massa at augue. 
+		Donec mollis libero non suscipit condimentum. Vestibulum eu aliquam dolor, eu tristique mauris. Aenean 
+		suscipit sapien eu justo interdum, sit amet molestie metus accumsan. Pellentesque posuere ornare nibh 
+		vel viverra. Nam porta mollis enim, quis efficitur quam consectetur eu. Cras urna tellus, aliquam sed 
+		dignissim quis, condimentum nec libero. Pellentesque eu eros est. Phasellus placerat lacus auctor interdum 
+		convallis. In porta eu tortor sed feugiat. Sed dictum sapien sed dui iaculis auctor. Praesent eu quam viverra, 
+		tincidunt dui in, tempor lacus. Curabitur et purus facilisis, pretium lectus eget, mollis nisi.
+		</td>
+		
+		<td>
+		Aenean maximus pretium augue eget pharetra. Phasellus a tincidunt odio. Etiam ut maximus metus, 
+		sit amet finibus lectus. Mauris maximus mi nibh, vitae ultricies lorem dignissim vel. Sed pharetra 
+		dolor eu lorem commodo, vitae euismod sem vulputate. Proin vel augue vel velit gravida viverra non ac 
+		nunc. Ut pulvinar tincidunt sapien, vel molestie turpis suscipit vel. Sed dignissim sit amet tellus sed 
+		eleifend. Curabitur eros ipsum, rutrum luctus volutpat a, pharetra vitae lorem. Etiam ac facilisis tortor.
+		<img src="https://via.placeholder.com/300" alt="Placeholder Image"/>
+		Fusce pharetra semper facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum 
+		tellus et mollis fringilla. Donec purus lorem, consequat tempus pharetra ut, fringilla pellentesque metus. 
+		Nullam sed ipsum ut nisi pellentesque tempus. Aliquam erat volutpat. Nullam auctor risus a odio finibus, 
+		quis consequat dui tristique. Integer vitae orci sed risus vulputate viverra. Suspendisse iaculis, ligula 
+		vel tincidunt semper, arcu libero ornare nunc, eu dictum mi orci porta leo. Aliquam et libero quis lacus 
+		semper rutrum non eu erat. Aenean sodales auctor sapien, quis venenatis dui interdum et. Maecenas odio metus,
+		varius ut ex vel, elementum interdum ligula.
+		</td>
+		
+	</tr>
+	</table>
+
+
+        <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required autofocus >
+                
+				<label for="zip">Zip:</label>
+                <input type="text" id="zip" required 
+						pattern="\d{5}([\-]\d{4})?" 
+						title="Must be 99999 or 99999-9999">
+                
+				<label for="ssn">SSN:</label>
+                <input type="text" id="ssn" required 
+						pattern="\d{3}[\-]\d{2}[\-]\d{4}" 
+						title="Must be 123-45-6789">
+                
+						<input id="submit" type="submit" name="submit" value="Submit Survey">
+                
+        </form>
+
+</body>
+</html>

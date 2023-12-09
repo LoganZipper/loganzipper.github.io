@@ -1,0 +1,80 @@
+body {
+    font: 90% Arial, Helvetica, sans-serif;
+    background-color: #ebebe8;
+    margin: 20px; }
+header {
+    padding: 40px 0;
+    border-bottom: 2px solid black;
+
+}
+header img {
+    float: left;
+}
+header h1 {
+    font-size: 400%;
+    text-align: center;
+    font-family: "Georgia", 'Headings', Arial, Helvetica, serif;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+header h3 {
+    font-size: 125%;
+    text-align: center;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 10vw 40vw;
+    
+}
+
+label {
+    grid-column: 1/2;
+    min-width: 10em;
+}
+
+input, select {
+    grid-column: 2/3;
+    margin-left: 1em;
+    margin-bottom: .5em;
+}
+input:focus {
+        border: 2px solid navy; }
+.submit {
+    width: 50%;
+}
+
+#ticTac {
+    display: grid;
+    grid-template-rows: 40px 50px repeat(3, 80px);
+    grid-template-columns: repeat(3, 80px);
+}
+
+#ticTac h2 {
+    text-align: center;
+    grid-row: 1;
+    grid-column: span 3;
+}
+#result {
+    text-align: center;
+    grid-row-start: 2;
+    grid-column: span 3;
+
+}
+
+.ticBox {
+    width: 90%;
+    height: 90%;
+    background-color: grey;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-right: 5px;
+    float: left;
+    font-size: 60px;
+    text-align: center;
+    color: red;
+    cursor: pointer;
+}
+
+.ticBox:hover {
+    background-color: antiquewhite;
+}
