@@ -67,6 +67,10 @@ main {
     margin-left: 2em;
 }
 
+main p {
+    margin-left: 4em;
+}
+
 nav li a {
     display: block;
     color: #FFF;
