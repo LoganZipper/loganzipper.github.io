@@ -1,6 +1,7 @@
 body {
     font: 1em 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #EBEBE8;
+    background-color: #555;
+    color: #DDCCCC
 }
 header {
     padding: 10px 0 0 0;
@@ -59,6 +60,11 @@ nav li {
 
 #a1 {
     margin-right: 2%;
+}
+
+main {
+    margin-top: 2em;
+    margin-left: 2em;
 }
 
 nav li a {
