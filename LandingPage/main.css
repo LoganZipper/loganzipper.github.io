@@ -5,8 +5,8 @@ body {
 header {
     padding: 10px 0 0 0;
     border-bottom: 2px solid black;
-    background-color: #414141;
-    color: whitesmoke;
+    background-color: #111;
+    color: cyan;
 }
 header img {
     float: left;
