@@ -137,12 +137,8 @@ li a:hover {
     .assignments h2 {
         font-size: 1.75em;
     }
-    main {
-        
-    }
-    /*
-	header {
-		font-size: 80%;
+	header h1 {
+		font-size: 8vw;
 	}
-    */
+    
 }
